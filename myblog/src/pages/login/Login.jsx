@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://fulstackblog-api.vercel.app/api/auth/login", {
           username,
         
         password,
@@ -26,7 +26,7 @@ export default function Login() {
       localStorage.setItem('jwt', token); // Store JWT in local storage
       let user={};
          try {
-        const response = await axios.get('http://localhost:5000/api/auth/me', {
+        const response = await axios.get('https://fulstackblog-api.vercel.app/api/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`, // Include JWT in the request header
           },

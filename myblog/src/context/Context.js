@@ -22,11 +22,14 @@ export const ContextProvider = ({ children }) => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include JWT in the header
-          },
-        });
+        const response = await axios.get(
+          "https://fulstackblog-api.vercel.app/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include JWT in the header
+            },
+          }
+        );
 
         dispatch({ type: "LOGIN_SUCCESS", payload: response.data }); // Set user data in context
       } catch (error) {

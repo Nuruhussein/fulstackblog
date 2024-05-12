@@ -10,7 +10,7 @@ export default function SideBar() {
     const getCats = async () => {
       // const res = await axios.get("http://localhost:5000/api/categories");
       // setCats(res.data);
-      const res = await axios.get("http://localhost:5000/api/posts");
+      const res = await axios.get("https://fulstackblog-api.vercel.app/api/posts");
     
       setPosts(res.data);
 

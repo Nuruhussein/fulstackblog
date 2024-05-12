@@ -74,7 +74,7 @@ const Topbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
      const { user ,dispatch } = useContext(Context);
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://fulstackblog-api.vercel.app/images/";
   
 
   const toggleMobileMenu = () => {

@@ -2,7 +2,7 @@ import "./post.css";
 import { Link } from "react-router-dom";
 
 export default function Post({ post}) {
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://fulstackblog-api.vercel.app/images/";
   return (
     <div className="post w-screen ml-0 md:w-72">
       {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
