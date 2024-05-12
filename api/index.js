@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: ["https://nurblog.vercel.app"],
+    origin: [""],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Include Authorization header
     credentials: true,
