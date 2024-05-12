@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
@@ -28,12 +28,51 @@ router.post("/register", async (req, res) => {
 
       const validated = await bcrypt.compare(req.body.password, user.password);
       !validated && res.status(400).json("Wrong credentials!");
+      // Create a JWT
+      const token = jwt.sign(
+        { id: user._id, username: user.username },
+        "secretKey",
+        { expiresIn: "1h" }
+      );
 
-      const { password, ...others } = user._doc;
-      res.status(200).json(others);
+      res.status(200).json({ token });
+
+      // const { password, ...others } = user._doc;
+      // res.status(200).json(others);
     } catch (err) {
       res.status(500).json(err);
     }
   });
 });
+// Protected route example
+const auth = (req, res, next) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+
+  if (!token) {
+    return res.status(401).json({ message: "No token, authorization denied" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "secretKey");
+    req.user = decoded;
+    // console.log(req.user); // Attach decoded user info to request
+    next(); // Proceed to the next middleware/route handler
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+// Protected route to fetch user data
+router.get("/me", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password"); // Exclude the password
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user); // Return user data
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

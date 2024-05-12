@@ -84,9 +84,11 @@ const Topbar = () => {
   const toggleProfileDropdown = () => {
     setProfileDropdownOpen(!isProfileDropdownOpen);
   };
-const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-  };
+
+  const handleLogout = () => {
+  localStorage.removeItem("jwt");
+  dispatch({ type: "LOGOUT" });
+};
   return (
     <nav className="">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

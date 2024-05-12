@@ -34,12 +34,12 @@ const [categories,setCategories]=useState("");
     } catch (err) {}
   };
   return (
-    <div className="write">
+    <div className="write ">
       {file && (
-        <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+        <img className="writeImg  m-5 md:ml-[150px]" src={URL.createObjectURL(file)} alt="" />
       )}
-      <form className="writeForm" onSubmit={handleSubmit}>
-        <div className="writeFormGroup">
+      <form className="writeForm  " onSubmit={handleSubmit}>
+        <div className="writeFormGroup  m-5 md:ml-[150px]">
           <label htmlFor="fileInput">
             <i className="writeIcon fas fa-plus"></i>
           </label>
@@ -57,7 +57,8 @@ const [categories,setCategories]=useState("");
             onChange={e=>setTitle(e.target.value)}
           />
         </div>
-        <div className="writeFormGroup">
+
+        <div className="writeFormGroup m-5 md:ml-[150px] flex flex-col">
           <textarea
             placeholder="Tell your story..."
             type="text"
@@ -70,11 +71,12 @@ const [categories,setCategories]=useState("");
            className="cat"
             onChange={(e) => setCategories(e.target.value)}
           />
-        </div>
-        
-        <button className="writeSubmit" type="submit">
+          <button className="writeSubmit" type="submit">
           Publish
         </button>
+        </div>
+        
+        
       </form>
     </div>
   );

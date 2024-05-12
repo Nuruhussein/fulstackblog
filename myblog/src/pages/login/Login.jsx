@@ -1,13 +1,15 @@
 
 import axios from "axios";
-import { useContext, useRef } from "react";
+import { useContext,useState} from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import "./login.css";
 
 export default function Login() {
-  const userRef = useRef();
-  const passwordRef = useRef();
+ 
+    const [username, setUsername] = useState("");
+      const [password, setPassword] = useState("");
+
   const { dispatch, isFetching} = useContext(Context);
 
   const handleSubmit = async (e) => {
@@ -15,10 +17,27 @@ export default function Login() {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
-        username: userRef.current.value,
-        password: passwordRef.current.value,
+          username,
+        
+        password,
       });
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+     
+      const token = await res.data.token;
+      localStorage.setItem('jwt', token); // Store JWT in local storage
+      let user={};
+         try {
+        const response = await axios.get('http://localhost:5000/api/auth/me', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include JWT in the request header
+          },
+        });
+        user = response.data;
+
+      } catch (error) {
+        console.error('Error fetching user data:', error.response?.data.message);
+      }
+  
+      dispatch({ type: "LOGIN_SUCCESS", payload: user });
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE" });
     }
@@ -33,14 +52,16 @@ export default function Login() {
           type="text"
           className="loginInput"
           placeholder="Enter your username..."
-          ref={userRef}
+             onChange={(e) => setUsername(e.target.value)}
+          // ref={userRef}
         />
         <label>Password</label>
         <input
           type="password"
           className="loginInput"
           placeholder="Enter your password..."
-          ref={passwordRef}
+            onChange={(e) => setPassword(e.target.value)}
+          // ref={passwordRef}
         />
         <button className="loginButton" type="submit" disabled={isFetching}>
           Login

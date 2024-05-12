@@ -8,7 +8,7 @@ const Reducer = (state, action) => {
       };
     case "LOGIN_SUCCESS":
       return {
-        user: action.payload,
+        user: action.payload, // Set the user data
         isFetching: false,
         error: false,
       };
@@ -21,28 +21,28 @@ const Reducer = (state, action) => {
     case "UPDATE_START":
       return {
         ...state,
-        isFetching: true,
+        isFetching: true, // Indicates ongoing update
       };
     case "UPDATE_SUCCESS":
       return {
-        user: action.payload,
+        user: action.payload, // Set the updated user data
         isFetching: false,
         error: false,
       };
     case "UPDATE_FAILURE":
       return {
-        user: state.user,
+        user: state.user, // Retain the previous user data
         isFetching: false,
         error: true,
       };
     case "LOGOUT":
       return {
-        user: null,
+        user: null, // Clear the user data on logout
         isFetching: false,
         error: false,
       };
     default:
-      return state;
+      return state; // Default case for unknown actions
   }
 };
 

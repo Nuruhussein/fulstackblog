@@ -1,12 +1,13 @@
 .post {
     /* width: 300px; */
-    /* height: 400px; */
-    margin: 0px 25px 40px 25px;
+    height: 450px;
+    margin: 0px 30px 40px 30px;
     display: flex;
     flex-direction: column;
     opacity: 0;
     /* Initially set opacity to 0 for the fade-in animation */
     animation: fadeIn 0.5s ease-in-out forwards;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Apply the fade-in animation */
 }
 
@@ -20,10 +21,10 @@
     }
 }
 
-.post:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* .post:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     /* Add a subtle box shadow on hover */
-}
+/* } */
 
 .postImg {
     width: 100%;
