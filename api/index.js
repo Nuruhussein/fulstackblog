@@ -20,21 +20,30 @@ app.use(express.json());
 
 // Middleware for handling CORS POLICY
 // Option 1: Allow All Origins with Default of cors(*)
-app.use(cors());
-// Option 2: Allow Custom Origins
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type'],
-//   })
-// );
+// // app.use(cors());
+// Middleware for handling CORS POLICY
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Include Authorization header
+    credentials: true,
+  })
+);
+
+// Middleware for setting Referrer Policy header
+app.use((req, res, next) => {
+  res.setHeader("Referrer-Policy", "no-referrer-when-downgrade");
+  next();
+});
 
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
+// MongoDB Connection
+const mongoURI = process.env.MONGO_URI; // Use environment variables for security
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Myblog")
-  .then(console.log("Connected to MongoDB"))
+  .connect(mongoURI)
+  .then(console.log("Connected to MongoDBatlas"))
   .catch((err) => console.log(err));
 
 ///uploding image

@@ -77,9 +77,9 @@ function Header() {
       >
         <TypeAnimation
           sequence={[
-            'fulan hifz and \n terbiya merkez',
+            'this is my blog \n app',
             1500,
-            'contact us \n now',
+            'explore  \n now',
             1500,
           ]}
           wrapper="h2"

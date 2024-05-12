@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+dotenv.config();
+// MongoDB Connection
+const secret = process.env.SECRET; // Use environment variables for security
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
@@ -31,7 +35,7 @@ router.post("/register", async (req, res) => {
       // Create a JWT
       const token = jwt.sign(
         { id: user._id, username: user.username },
-        "secretKey",
+        secret,
         { expiresIn: "1h" }
       );
 
@@ -53,7 +57,7 @@ const auth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "secretKey");
+    const decoded = jwt.verify(token, secret);
     req.user = decoded;
     // console.log(req.user); // Attach decoded user info to request
     next(); // Proceed to the next middleware/route handler

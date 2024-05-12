@@ -33,11 +33,12 @@ export default function SideBar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          {posts.map((c,index) => (
-            <Link to={`/?cat=${c.categories}`} key={index} className="link">
-            <li  className="sidebarListItem">{c.categories}</li>
-            </Link>
-          ))}
+        {[...new Set(posts.map((post) => post.categories))].map((category, index) => (
+  <Link to={`/?cat=${category}`} key={index} className="link">
+    <li className="sidebarListItem">{category}</li>
+  </Link>
+))}
+
         </ul>
       </div>
       <div className="sidebarItem">
