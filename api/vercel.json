@@ -7,11 +7,12 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/" }
+    { "src": "/api/(.*)", "dest": "/api/$1" }, 
+    { "src": "/images/(.*)", "dest": "/api/images/$1" }, 
+    { "src": "/(.*)", "dest": "/api/$1" } 
   ],
   "static": {
-    "directory": "images", 
-   
-    "public": "/images"
+    "directory": "api/images", 
+    "public": "/api/images" 
   }
 }
