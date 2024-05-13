@@ -47,20 +47,22 @@ mongoose
   .then(console.log("Connected to MongoDBatlas"))
   .catch((err) => console.log(err));
 
-///uploding image
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
+// Assuming you are using multer for file upload
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "./images"); // Save uploaded images to the 'images' directory
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname); // Use the original file name
+    },
+  }),
 });
 
-const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+  res
+    .status(200)
+    .json({ message: "File has been uploaded", filename: req.file.filename });
 });
 //getSinglepost
 app.get("/", async (req, res) => {
