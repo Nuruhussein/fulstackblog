@@ -10,8 +10,8 @@
     { "src": "/(.*)", "dest": "/" }
   ],
   "static": {
-    "directory": "api/images", 
+    "directory": "images", 
    
-    "public": "/api/images"
+    "public": "/images"
   }
 }
