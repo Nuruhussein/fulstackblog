@@ -6,10 +6,12 @@
       "use": "@vercel/node"
     }
   ],
-  "routes":[
-    {
-        "src":"/(.*)",
-        "dest":"/"
-    }
-  ]
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "static": {
+    "directory": "api/images", 
+   
+    "public": "/api/images"
+  }
 }
