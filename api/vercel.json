@@ -11,9 +11,5 @@
         "src":"/(.*)",
         "dest":"/"
     }
-  ],
-  "static": {
-    "directory": "images",
-    "public": "/images"
-  }
+  ]
 }
