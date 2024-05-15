@@ -9,7 +9,7 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-
+const vercel = require("@vercel/node");
 dotenv.config();
 
 app.use(express.urlencoded({ extended: true }));
@@ -58,10 +58,32 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+app.post("/api/upload", upload.single("file"), async (req, res) => {
+  try {
+    const filePath = req.file.path; // Path to the uploaded file (temporary)
+
+    // Upload the file to Vercel Blob Storage within a specific directory (e.g., "images")
+    const result = await vercel.getClient().upload(filePath, "/images");
+    const imageUrl = result.url; // Access uploaded file URL
+
+    // Persist the image URL in your database (replace with your Mongoose model)
+    const Post = require("./models/Post"); // Assuming you have a Post model
+    const newPost = new Post({
+      // ... other post data
+      photo: imageUrl,
+    });
+    await newPost.save();
+
+    // Cleanup the temporary file after successful upload
+    fs.unlink(filePath, (err) => {
+      if (err) console.error(err);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json("Failed to upload file");
+  }
 });
+
 //getSinglepost
 app.get("/", async (req, res) => {
   res.json("hello world");
