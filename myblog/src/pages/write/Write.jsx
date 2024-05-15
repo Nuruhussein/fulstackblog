@@ -18,11 +18,13 @@ export default function Write() {
       desc,
       categories,
     };
+
     if (file) {
       const data = new FormData();
       const filename = Date.now() + file.name;
       data.append("name", filename);
       data.append("file", file);
+
       try {
         const uploadResponse = await axios.post("https://fulstackblog-api.vercel.app/api/upload", data);
         newPost.photo = uploadResponse.data.url; // Use the URL from Vercel Blob Storage
@@ -30,6 +32,7 @@ export default function Write() {
         console.error("Failed to upload file:", err);
       }
     }
+
     try {
       const res = await axios.post("https://fulstackblog-api.vercel.app/api/posts", newPost);
       window.location.replace("/post/" + res.data._id);

@@ -67,9 +67,10 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       }
     );
 
+    const imageUrl = response.data.url;
     fs.unlinkSync(filePath); // Cleanup the temporary file
 
-    res.status(200).json(response.data);
+    res.status(200).json({ url: imageUrl });
   } catch (err) {
     console.error(err);
     fs.unlinkSync(filePath); // Ensure cleanup on error
