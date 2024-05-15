@@ -28,7 +28,7 @@ app.use(
     origin: ["https://nurblog.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Include Authorization header
-    credentials: true,
+    credentials: false,
   })
 );
 
