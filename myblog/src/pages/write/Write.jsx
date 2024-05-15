@@ -6,33 +6,34 @@ import { Context } from "../../context/Context";
 export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-const [categories,setCategories]=useState("");
+  const [categories, setCategories] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
       username: user.username,
       title,
       desc,
-      categories
+      categories,
+      photo: file ? await convertImageToBase64(file) : null,
     };
-    if (file) {
-      const data =new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
-      data.append("file", file);
-      newPost.photo = filename;
-      try {
-        await axios.post("https://fulstackblog-api.vercel.app/api/upload", data);
-      } catch (err) {}
-    }
     try {
       const res = await axios.post("https://fulstackblog-api.vercel.app/api/posts", newPost);
       window.location.replace("/post/" + res.data._id);
     } catch (err) {}
   };
+
+  const convertImageToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   return (
     <div className="write ">
       {file && (
@@ -54,7 +55,7 @@ const [categories,setCategories]=useState("");
             placeholder="Title"
             className="writeInput"
             autoFocus={true}
-            onChange={e=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -63,20 +64,18 @@ const [categories,setCategories]=useState("");
             placeholder="Tell your story..."
             type="text"
             className="writeInput writeText"
-            onChange={e=>setDesc(e.target.value)}
+            onChange={(e) => setDesc(e.target.value)}
           ></textarea>
-           <input
-           type="input"
-           placeholder="add category you want"
-           className="cat"
+          <input
+            type="input"
+            placeholder="Add category you want"
+            className="cat"
             onChange={(e) => setCategories(e.target.value)}
           />
           <button className="writeSubmit" type="submit">
-          Publish
-        </button>
+            Publish
+          </button>
         </div>
-        
-        
       </form>
     </div>
   );

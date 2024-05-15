@@ -59,8 +59,20 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+app.post("/api/upload", async (req, res) => {
+  try {
+    const base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
+    const fileName = Date.now() + ".png";
+    fs.writeFileSync(
+      path.join(__dirname, "/images/", fileName),
+      base64Data,
+      "base64"
+    );
+    res.status(200).json("File has been uploaded");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json("Failed to upload file");
+  }
 });
 //getSinglepost
 app.get("/", async (req, res) => {
