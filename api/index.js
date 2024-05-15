@@ -9,7 +9,7 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { Vercel } = require("@vercel/node"); // For Vercel Blob Storage
+
 dotenv.config();
 
 app.use(express.urlencoded({ extended: true }));
@@ -59,25 +59,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-// Route for uploading images (adjust based on chosen storage)
-app.post("/api/upload", upload.single("file"), async (req, res) => {
-  try {
-    if (vercelClient) {
-      // Vercel Blob Storage upload logic
-      const filePath = req.file.path;
-      const result = await vercelClient.upload(filePath, "/images"); // Adjust directory
-      const imageUrl = result.url;
-      // ... use imageUrl for post creation
-    } else {
-      // Local storage logic
-      const imageUrl = path.join(req.baseUrl, "/", req.file.filename); // Adjust path
-      // ... use imageUrl for post creation
-    }
-    res.status(200).json("File uploaded successfully");
-  } catch (err) {
-    console.error(err);
-    res.status(500).json("Failed to upload file");
-  }
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
 });
 //getSinglepost
 app.get("/", async (req, res) => {
