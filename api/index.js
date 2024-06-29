@@ -24,8 +24,8 @@ app.use(express.json());
 // Middleware for handling CORS POLICY
 app.use(
   cors({
-    // origin: "http://localhost:3000",
-    origin: ["https://nurblog.vercel.app"],
+    origin: "http://localhost:3000",
+    // origin: ["https://nurblog.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Include Authorization header
     credentials: true,
