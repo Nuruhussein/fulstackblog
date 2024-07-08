@@ -1,5 +1,3 @@
-
-
 // export default function Topbar() {
 //   const { user ,dispatch } = useContext(Context);
 //   const PF = "http://localhost:5000/images/";
@@ -68,14 +66,11 @@ import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import "./topbar.css";
 
-
-
 const Topbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
-     const { user ,dispatch } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const PF = "https://fulstackblog-api.vercel.app/images/";
-  
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -86,9 +81,9 @@ const Topbar = () => {
   };
 
   const handleLogout = () => {
-  localStorage.removeItem("jwt");
-  dispatch({ type: "LOGOUT" });
-};
+    localStorage.removeItem("jwt");
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <nav className="">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -140,8 +135,8 @@ const Topbar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                className="h-10 w-12 "
+                src="https://th.bing.com/th/id/OIP.fXktcQxAb0ahw5VZwNk_GgHaHa?rs=1&pid=ImgDetMain"
                 alt="Your Company"
               />
             </div>
@@ -151,15 +146,15 @@ const Topbar = () => {
                 {/* Navigation links */}
                 <Link
                   to="/"
-                   className="text-gray-500 text-md hover:text-teal-400 rounded-md px-3 py-2  font-medium"
+                  className="text-gray-500 text-md hover:text-teal-400 rounded-md px-3 py-2  font-medium"
                 >
                   Home
                 </Link>
                 <Link
-                   to="#"
+                  to="#"
                   className="text-gray-500 text-md hover:text-teal-400 rounded-md px-3 py-2  font-medium"
                 >
-                 About
+                  About
                 </Link>
                 <Link
                   to="#"
@@ -173,47 +168,50 @@ const Topbar = () => {
                 >
                   Hire me
                 </Link>
-                  <Link className="text-gray-500 text-md hover:text-teal-400 rounded-md px-3 py-2  font-medium" to="/write">
-               Write
-            </Link>
+                <Link
+                  className="text-gray-500 text-md hover:text-teal-400 rounded-md px-3 py-2  font-medium"
+                  to="/write"
+                >
+                  Write
+                </Link>
               </div>
             </div>
           </div>
 
           {/* Right-side icons */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            
             {/* Profile button with dropdown */}
             <div className="relative ml-3">
-             {user ? (<button
-                type="button"
-                className="flex items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                aria-haspopup="true"
-                aria-expanded={isProfileDropdownOpen}
-                onClick={toggleProfileDropdown}
-              >
-                <span className="sr-only">Open user menu</span>
-                
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src={PF+user.profilePic}
-                  
-                  alt=""
-                />
-              </button>) :(
-          <ul className="topList hidden md:flex">
-            <li className="topListItem">
-              <Link className="link" to="/login">
-                LOGIN
-              </Link>
-            </li>
-            <li className="topListItem">
-              <Link className="link" to="/register">
-                REGISTER
-              </Link>
-            </li>
-          </ul>
-        ) } 
+              {user ? (
+                <button
+                  type="button"
+                  className="flex items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  aria-haspopup="true"
+                  aria-expanded={isProfileDropdownOpen}
+                  onClick={toggleProfileDropdown}
+                >
+                  <span className="sr-only">Open user menu</span>
+
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src={PF + user.profilePic}
+                    alt=""
+                  />
+                </button>
+              ) : (
+                <ul className="topList hidden md:flex">
+                  <li className="topListItem">
+                    <Link className="link" to="/login">
+                      LOGIN
+                    </Link>
+                  </li>
+                  <li className="topListItem">
+                    <Link className="link" to="/register">
+                      REGISTER
+                    </Link>
+                  </li>
+                </ul>
+              )}
 
               {/* Profile dropdown */}
               {isProfileDropdownOpen && (
@@ -230,18 +228,27 @@ const Topbar = () => {
                     Settings
                   </Link>
                   <Link
-                to={`/?user=${user && user.uername}`}
+                    to={`/?user=${user && user.uername}`}
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                   >
-                   my posts
+                    my posts
                   </Link>
-                  <Link className="block px-4 py-2 text-sm text-gray-700" to="/write">
-               WRITE
-            </Link>
-                            <li className="block px-4 py-2 text-sm cursor-pointer text-gray-700"  onClick={handleLogout}>
-           <span onClick={toggleProfileDropdown}> {user && "LOGOUT"}</span> 
-           </li>
+                  <Link
+                    className="block px-4 py-2 text-sm text-gray-700"
+                    to="/write"
+                  >
+                    WRITE
+                  </Link>
+                  <li
+                    className="block px-4 py-2 text-sm cursor-pointer text-gray-700"
+                    onClick={handleLogout}
+                  >
+                    <span onClick={toggleProfileDropdown}>
+                      {" "}
+                      {user && "LOGOUT"}
+                    </span>
+                  </li>
                 </div>
               )}
             </div>
@@ -258,7 +265,7 @@ const Topbar = () => {
               className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
               aria-current="page"
             >
-             Home
+              Home
             </Link>
             <Link
               to="#"
@@ -278,8 +285,11 @@ const Topbar = () => {
             >
               projects
             </Link>
-               <Link  className="text-gray-500 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" to="/write">
-               Write
+            <Link
+              className="text-gray-500 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              to="/write"
+            >
+              Write
             </Link>
           </div>
         </div>

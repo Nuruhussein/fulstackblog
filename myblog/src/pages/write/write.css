@@ -3,21 +3,25 @@
 }
 
 .writeImg {
-   
     width: 70vw;
     height: 250px;
     border-radius: 10px;
     object-fit: cover;
 }
+
 .writeForm {
     position: relative;
 }
-.writeFormGroup {
-    
-    display: flex;
-    align-items: center;
-}
 
+.writeFormGroup {
+    display: flex;
+    flex-direction: column;
+    /* Adjusted to stack elements vertically */
+    align-items: flex-start;
+    /* Adjusted alignment for better layout */
+    margin: 20px 0;
+    /* Added margin for spacing */
+}
 
 .writeIcon {
     width: 25px;
@@ -30,13 +34,19 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-bottom: 10px;
+    /* Adjusted margin for spacing */
 }
+
 .writeInput {
     font-size: 30px;
     border: none;
     padding: 20px;
     width: 70vw;
+    margin-bottom: 10px;
+    /* Adjusted margin for spacing */
 }
+
 .writeInput::placeholder {
     color: rgb(189, 185, 185);
     font-weight: 400;
@@ -45,28 +55,40 @@
 .writeInput:focus {
     outline-style: none;
 }
+
 .writeText {
-  width: 70vw;
-  height: 50vh;
-  font-family: inherit;
-  font-size: 20px;
-  border: 1px gray solid;
-  margin: 20px; ;
+    width: 70vw;
+    height: 50vh;
+    font-family: inherit;
+    font-size: 20px;
+    border: 1px gray solid;
+    padding: 10px;
+    /* Added padding for textarea */
+    margin-bottom: 10px;
+    /* Adjusted margin for spacing */
 }
-.cat{
- width: 70vw;
- height: 50px;
- border: none;
+
+.cat {
+    width: 70vw;
+    height: 50px;
+    border: 1px solid gray;
+    /* Added border for clarity */
+    border-radius: 5px;
+    /* Added border radius for style */
+    padding: 10px;
+    /* Added padding for input */
+    margin-bottom: 10px;
+    /* Adjusted margin for spacing */
 }
 
 .writeSubmit {
-   
     color: white;
     background-color: teal;
-    padding: 10px;
+    padding: 10px 20px;
+    /* Adjusted padding for button */
     border: none;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    margin-top:10px ;
+    margin-top: 10px;
 }

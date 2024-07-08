@@ -1,21 +1,20 @@
-  //  const handleSearch = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3001/api/products/search?query=${query}`
-  //     );
-   
-  //   } catch (error) {
-  //     console.error("Error fetching products:", error);
-  //   }
-  // };
+//  const handleSearch = async () => {
+//   try {
+//     const response = await axios.get(
+//       `http://localhost:3001/api/products/search?query=${query}`
+//     );
 
+//   } catch (error) {
+//     console.error("Error fetching products:", error);
+//   }
+// };
 
-import React, { useState, useEffect, useCallback } from 'react'; // Use useCallback to ensure function stability
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
-import { RxDotFilled } from 'react-icons/rx';
-import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from "react"; // Use useCallback to ensure function stability
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
 function Header() {
@@ -24,13 +23,13 @@ function Header() {
 
   const slides = [
     {
-      url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2620&q=80',
+      url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2620&q=80",
     },
     {
-      url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80',
+      url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80",
     },
     {
-      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=2672&q=80',
+      url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=2672&q=80",
     },
   ];
 
@@ -69,30 +68,26 @@ function Header() {
         animate="animate"
         exit="exit"
         variants={slideVariants}
-        transition={{ duration: 2, ease: 'easeInOut' }}
+        transition={{ duration: 2, ease: "easeInOut" }}
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(255,255,255,0.2)), url(${slides[currentIndex].url})`,
         }}
         className="w-full flex flex-col justify-center items-center text-center h-full bg-center bg-cover"
       >
         <TypeAnimation
-          sequence={[
-            'this is my blog \n app',
-            1500,
-            'explore  \n now',
-            1500,
-          ]}
+          sequence={["this is my blog \n app", 1500, "explore  \n now", 1500]}
           wrapper="h2"
           speed={50}
-          style={{ whiteSpace: 'pre-line', height: '195px', display: 'block' }}
+          style={{ whiteSpace: "pre-line", height: "195px", display: "block" }}
           className="font-bold text-white sm:text-[48px] text-[40px] leading-[56.8px] font-poppins"
           repeat={2}
         />
 
         <div className="relative">
           <Link to={`/?query=${query}`} className="link">
-            
-         <div className='absolute top-0  mt-3 text-2xl bottom-0 w-6 h-6 my-auto text-gray-400  left-3'><FaSearch /></div>   
+            <div className="absolute top-0  mt-3 text-2xl bottom-0 w-6 h-6 my-auto text-gray-400  left-3">
+              <FaSearch />
+            </div>
           </Link>
 
           <input
@@ -106,16 +101,12 @@ function Header() {
       </motion.div>
 
       {/* Left Arrow */}
-      <div
-        className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl   bg-gray-100 opacity-30 text-gray-100  cursor-pointer"
-      >
+      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 border-radius text-2xl rounded-full  bg-gray-100 opacity-30 text-gray-100  cursor-pointer">
         <BsChevronCompactLeft onClick={prevSlide} size={30} />
       </div>
 
       {/* Right Arrow */}
-      <div
-        className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl  bg-gray-100 opacity-30 text-gray-100 cursor-pointer"
-      >
+      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full  bg-gray-100 opacity-30 text-gray-100 cursor-pointer">
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
 
