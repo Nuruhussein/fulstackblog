@@ -10,12 +10,14 @@ export default function SideBar() {
     const getCats = async () => {
       // const res = await axios.get("http://localhost:5000/api/categories");
       // setCats(res.data);
-     const res = await axios.get("https://fulstackblog-api.vercel.app/api/posts", {
-  timeout: 10000 // Set timeout to 10 seconds (adjust as needed)
-});
-    
-      setPosts(res.data);
+      const res = await axios.get(
+        "https://fulstackblog-api.vercel.app/api/posts",
+        {
+          timeout: 10000, // Set timeout to 10 seconds (adjust as needed)
+        }
+      );
 
+      setPosts(res.data);
     };
     getCats();
   }, []);
@@ -23,10 +25,7 @@ export default function SideBar() {
     <div className="sidebar hidden md:block">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src="../assets/1702302281627im1.jpg"
-          alt=""
-        />
+        <img src="../assets/1702302281627im1.jpg" alt="" />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate qui
           necessitatibus nostrum illum reprehenderit.
@@ -35,12 +34,13 @@ export default function SideBar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-        {[...new Set(posts.map((post) => post.categories))].map((category, index) => (
-  <Link to={`/?cat=${category}`} key={index} className="link">
-    <li className="sidebarListItem">{category}</li>
-  </Link>
-))}
-
+          {[...new Set(posts.map((post) => post.categories))].map(
+            (category, index) => (
+              <Link to={`/?cat=${category}`} key={index} className="link">
+                <li className="sidebarListItems">{category}</li>
+              </Link>
+            )
+          )}
         </ul>
       </div>
       <div className="sidebarItem">

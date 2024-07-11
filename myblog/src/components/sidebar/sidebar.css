@@ -47,7 +47,7 @@
 .sidebarListItem {
     font-size: large;
     width: 50%;
-    margin: 2px 7px 2px 0;
+    margin: 2px 6px 2px 0;
     cursor: pointer;
 }
 .sidebarListItem:hover{
